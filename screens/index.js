@@ -1,9 +1,9 @@
 import Login from "./Login";
-import Register from "./Register";
+import Barcode from "./Barcode";
 import Verification from "./Verification";
 
 export {
     Login,
-    Register,
+    Barcode,
     Verification
 }

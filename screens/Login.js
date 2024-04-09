@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
+import { View, StyleSheet, Text, TouchableOpacity, Image, Alert } from 'react-native'
 import React, { useState, useReducer, useCallback } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import * as Animatable from "react-native-animatable"
@@ -29,7 +29,6 @@ const initialState = {
   formIsValid: false,
 }
 
-
 const Login = ({ navigation }) => {
   const [error, setError] = useState()
   const [isLoading, setIsLoading] = useState(false)
@@ -46,6 +45,18 @@ const Login = ({ navigation }) => {
   const facebookAuthHandler = () => {
 
   }
+  const test = () => {
+    // navigation.navigate('Barcode') 
+    Alert.alert('Alert Title', 'My Alert Msg', [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {text: 'OK', onPress: () => console.log('OK Pressed')},
+      ]);
+
+  }
 
   const googleAuthHandler = () => {
 }
@@ -56,54 +67,64 @@ const twitterAuthHandler = () => {
 
   return (
     
-    <SafeAreaView style={styles.container}>
-      <KeyboardAwareScrollView>
-      <View style={styles.background}>
+
+    
+    
+<SafeAreaView style={styles.container}>
+<KeyboardAwareScrollView>
+<View style={styles.background}>
         
 
         <StatusBar hidden />
         <View style={styles.header}>
-        <Text style={[styles.headerTitle, { fontFamily: 'Roboto', fontWeight: 'bold' }]}>Rack<Text style={{ color: '#4CB525' }}>POS</Text></Text>
-        <View>
-        <Text style={styles.subHeaderTitle}><Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', color: COLORS.black }}>Price Inquiry</Text></Text>
-        <Text style={[styles.welcome, { color: '#4CB525', marginTop: 70,} ]}>Hi, Welcome Back!</Text>
-</View>
-
+          <Text style={[styles.headerTitle, { fontFamily: 'Roboto', fontWeight: 'bold' }]}>Rack<Text style={{ color: '#4CB525' }}>POS</Text>
+          </Text>
+          <View>
+          <Text style={styles.subHeaderTitle}><Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', color: COLORS.black }}>Price Inquiry</Text>
+          </Text>
+          <Text style={[styles.welcome, { color: '#4CB525', marginTop: 70,} ]}>Hi, Welcome Back!</Text>
+          </View>
         </View>
+        
         <Animatable.View
-          animation="fadeInUpBig"
-          style={styles.footer}>
+          style={styles.footer}
+        >
+            <View style={styles.sectionstyle}>
+                <Image
+                    source={require("../theme/assets/icons/store.png")}
+                    style={styles.store}
+                />
+
+                <Input
+                    id="Store ID"
+                    placeholder="Store ID"
+                    placeholderTextColor={COLORS.black}
+                    onInputChanged={inputChangedHandler}
+                    errorText={formState.inputValidities["Store ID"]}
+                    keyboardType="email-address"
+                /> 
+            </View>
+
+            <View style={styles.sectionstyle}>
+                <Image
+                    source={require("../theme/assets/icons/username.png")}
+                    style={styles.store}
+                />
+
+                <Input
+                    id="Username"
+                    placeholder="Username"
+                    placeholderTextColor={COLORS.black}
+                    onInputChanged={inputChangedHandler}
+                    errorText={formState.inputValidities['Username']}
+                    keyboardType="email-address"
+                /> 
+            </View>
             
             <View style={styles.sectionstyle}>
-          <Image source={require("../theme/assets/icons/store.png")}
-          style={styles.store}/>
 
-            <Input
-              id="Store ID"
-              placeholder="Store ID"
-              placeholderTextColor={COLORS.black}
-              onInputChanged={inputChangedHandler}
-              errorText={formState.inputValidities["Store ID"]}
-              keyboardType="email-address"
-            /> 
-            </View>
-
-            <View style={styles.sectionstyle}>
-              <Image source={require("../theme/assets/icons/username.png")}
-              style={styles.store}/>
-
-            <Input
-              id="Username"
-              placeholder="Username"
-              placeholderTextColor={COLORS.black}
-              onInputChanged={inputChangedHandler}
-              errorText={formState.inputValidities['Username']}
-              keyboardType="email-address"
-            /> 
-            </View>
-            <View style={styles.sectionstyle}>
-
-              <Image source={require("../theme/assets/icons/password.png")}
+              <Image
+                source={require("../theme/assets/icons/password.png")}
                 style={styles.store}/>
 
             <Input
@@ -116,6 +137,7 @@ const twitterAuthHandler = () => {
               secureTextEntry={true}
             />
             </View>
+            </Animatable.View>
 
            <TouchableOpacity
   onPress={() => navigation.navigate("Verification")}>
@@ -125,15 +147,13 @@ const twitterAuthHandler = () => {
             <View style={styles.forgotpassword}>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               </View>
-              
+    
             </View>
-
-
 
             <Button
               title="LOGIN"
               isLoading={isLoading}
-              onPress={() => navigation.navigate('Register')}
+              onPress={() => test()}
               />
               
             <View style={styles.Rack}>
@@ -143,45 +163,34 @@ const twitterAuthHandler = () => {
             </View>
 
             <View style={{
-              flexDirection: "row",
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginVertical: SIZES.padding2
-           
-            }}>
-              
-              <View style={styles.Rackapp}>
-              </View>
-              
+                flexDirection: "row",
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginVertical: SIZES.padding2
+                }}>
+                <View style={styles.Rackapp}>
+                </View>
+                    
 
-              <View style={styles.make}>
-      <Image
-        source={require('../theme/assets/img/BarcodeImg.png')}
-        style={{ width: 300, height: 50, marginTop: -115, }}
-      />
-      <Image
-        source={require('../theme/assets/img/RackApp.png')}
-        style={{ width: 200, height: 60, marginTop: 40, alignItems: 'center', }}
-      />
-      <Text style={styles.footerText}>www.rackappsolutions.com</Text>
-        <Text style={styles.footerText}>contact@rackappsolutions.com</Text>
-        <Text style={styles.footerText}>+63 9366590757</Text>
-        
+                <View style={styles.make}>
+                    <Image
+                        source={require('../theme/assets/img/BarcodeImg.png')}
+                        style={{ width: 300, height: 50, marginTop: -115, }}
+                    />
+                    <Image
+                        source={require('../theme/assets/img/RackApp.png')}
+                        style={{ width: 200, height: 60, marginTop: 40, alignItems: 'center', }}
+                    />
+                        <Text style={styles.footerText}>www.rackappsolutions.com</Text>
+                        <Text style={styles.footerText}>contact@rackappsolutions.com</Text>
+                        <Text style={styles.footerText}>+63 9366590757</Text>
+                </View>
 
-    </View>
-    
-
-    </View>
+            </View>
    
-    
-
-
-            
-        
-        </Animatable.View>
-      </View>
-      </KeyboardAwareScrollView>
-    </SafeAreaView>
+</View>
+</KeyboardAwareScrollView>
+</SafeAreaView>
   )
 } 
 
@@ -263,10 +272,12 @@ inputHeader:{
   },
   sectionstyle: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'left',
     alignItems: 'center',
     height: 40,
     margin: 20,
+    borderBottomColor: 'RED',
+    borderBottomWidth: 1,
   },
   store:{
     padding: 10,

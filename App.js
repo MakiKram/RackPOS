@@ -4,7 +4,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useCallback } from "react";
-import { Login, Register, Verification } from "./screens";
+import { Login, Barcode, Verification } from "./screens";
 import { ScrollView } from "react-native";
 
 SplashScreen.preventAutoHideAsync();
@@ -40,8 +40,8 @@ export default function App() {
             }}
           />
           <Stack.Screen
-            name="Register"
-            component={Register}
+            name="Barcode"
+            component={Barcode}
             options={{
               headerShown: false
             }}

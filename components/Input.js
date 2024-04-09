@@ -16,7 +16,6 @@ const Input = (props) => {
                     onChangeText={onChangeText}
                     placeholder={props.placeholder}
                     placeholderTextColor={props.placeholderTextColor}
-                    underlineColorAndroid="black"
                 />
             </View>
             {
